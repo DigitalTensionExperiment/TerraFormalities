@@ -15,4 +15,10 @@ resource "aws_instance" "box001" {
       private_key = "${file(${var.path_to_private_key})}"
     }
   }
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /opt/script.sh",
+      "/opt/script.sh arguments" 
+    ]
+  }
 }

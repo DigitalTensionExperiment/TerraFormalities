@@ -19,4 +19,8 @@ lookup() in instance >> create a "map" variable in vars ;
 
 
 Upload public key to AWS: resource "aws_key_pair" ""{...} 
+
 Use private key to login: connection{} 
+
+After uploading a script: execute 
+- remote-exec 
