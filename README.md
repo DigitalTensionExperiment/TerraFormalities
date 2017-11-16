@@ -11,12 +11,31 @@ lookup() in instance >> create a "map" variable in vars ;
 1. run: # terraform plan
 
 ^ will ask for ACCESS_KEY and SECRET_KEY ;
-(Adding *.tfvars to gitignore makes it think the file is gone; 
+>(Adding *.tfvars to gitignore makes it think the file is gone; 
 Hiding it in gitignore is a lousy technique for multiple reasons;)   
 
-** Providing wrong values gives InvalidClientToken error;  
+Providing wrong values: 
+>  Error: Error asking for user input: 
+  Error parsing address 'aws_key_pair': invalid resource address "aws_key_pair"
 
-## Provisioning software  
+
+### Commands basics 
+
+$ terraform init 
+
+$ terraform plan 
+
+$ terraform plan -out output.file 
+$ terraform apply output.file 
+> Apply the output file b/c it contains the changes that will be made 
+
+$ terraform plan -out output.file ; terraform apply output.file ; rm output.file 
+
+$ terraform apply 
+
+$ terraform destroy 
+
+### Provisioning software  
 - file upload: provisioner "file"{...} added to instance;   
 
 
