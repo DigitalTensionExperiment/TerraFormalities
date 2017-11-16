@@ -4,13 +4,10 @@ Find AMI ID's here:
 https://cloud-images.ubuntu.com/locator/ec2/
 
 
-lookup() in instance >> create a "map" variable in vars ;
-
-
 0. Remove *.tfvars
 1. run: # terraform plan
 
-^ will ask for ACCESS_KEY and SECRET_KEY ;
+^ will ask for ACCESS_KEY and SECRET_KEY: 
 >(Adding *.tfvars to gitignore makes it think the file is gone; 
 Hiding it in gitignore is a lousy technique for multiple reasons;)   
 
@@ -25,9 +22,11 @@ $ terraform init
 
 $ terraform plan 
 
+Apply the output file b/c it contains the changes that will be made 
+
 $ terraform plan -out output.file 
+
 $ terraform apply output.file 
-> Apply the output file b/c it contains the changes that will be made 
 
 $ terraform plan -out output.file ; terraform apply output.file ; rm output.file 
 
