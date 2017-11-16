@@ -11,8 +11,10 @@ lookup() in instance >> create a "map" variable in vars ;
 1. run: # terraform plan
 
 ^ will ask for ACCESS_KEY and SECRET_KEY ;
-** Providing wrong values gives InvalidClientToken error;
+(Adding *.tfvars to gitignore makes it think the file is gone; 
+Hiding it in gitignore is a lousy technique for multiple reasons;)   
 
+** Providing wrong values gives InvalidClientToken error;  
 
 ## Provisioning software  
 - file upload: provisioner "file"{...} added to instance;   
