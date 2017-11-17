@@ -1,26 +1,34 @@
-//resource "aws_key_pair" "" {
-//  key_name = ""
-//  public_key = ""
-//}
-//
-resource "aws_instance" "box001" {
-  ami           = "ami-27fd535d"//"${lookup(var.AMIS, var.AWS_REGION)}"
-  instance_type = "t2.micro"
 
-//  provisioner "file" {
-//    source = "script.sh"
-//    destination = "/opt/script.sh"
-//    connection {
-//      user = "${var.instance_username}"
-//      private_key = "${file(${var.path_to_private_key})}"
-//    }
-//  }
-//  provisioner "remote-exec" {
-//    inline = [
-//      "chmod +x /opt/script.sh",
-//      "/opt/script.sh arguments"
-//    ]
-//  }
+// Send AWS key pair to
+resource "aws_key_pair" "terrakey" {
+  key_name = "terrakey"
+  public_key = "${file(${var.PATH_TO_PUBLIC_KEY})}"
+}
+
+resource "aws_instance" "box001" {
+
+  // security group not being specified (for now)
+  ami           = "${lookup(var.AMIS, var.AWS_REGION)}" //"ami-27fd535d"
+  instance_type = "t2.micro"
+  key_name = "${aws_key_pair.terrakey.key_name}"
+
+  // connection{} is using ssh
+  provisioner "file" {
+    source = "script.sh"
+    destination = "/opt/script.sh"
+    connection {
+      user = "${var.INSTANCE_USERNAME}"
+      private_key = "${file(${var.PATH_TO_PRIVATE_KEY})}"
+    }
+  }
+
+  //
+  provisioner "remote-exec" {
+    inline = [
+      "chmod +x /opt/script.sh",
+      "/opt/script.sh arguments"
+    ]
+  }
 }
 
 

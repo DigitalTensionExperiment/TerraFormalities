@@ -16,7 +16,7 @@ Providing wrong values:
   Error parsing address 'aws_key_pair': invalid resource address "aws_key_pair"
 
 
-### Commands basics 
+#### Commands basics 
 
 $ terraform init 
 
@@ -34,7 +34,20 @@ $ terraform apply
 
 $ terraform destroy 
 
-### Provisioning software  
+#### File upload: 
+ 
+  provisioner "file" {
+    source = "app.conf"
+    destination = "/etc/app.conf"
+    connection {
+      user = ""
+      private_key = ""
+    }
+  }
+  
+  
+
+#### Provisioning software  
 - file upload: provisioner "file"{...} added to instance;   
 
 
