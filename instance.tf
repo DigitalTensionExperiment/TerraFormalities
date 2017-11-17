@@ -12,7 +12,7 @@ resource "aws_instance" "box001" {
   instance_type = "t2.micro"
   key_name = "${aws_key_pair.terrakey.key_name}"
 
-  // connection{} is using ssh
+  // connection{} is using ssh: connects to host on which script.sh will be run:
   provisioner "file" {
     source = "script.sh"
     destination = "/opt/script.sh"
@@ -20,6 +20,11 @@ resource "aws_instance" "box001" {
       user = "${var.INSTANCE_USERNAME}"
       private_key = "${file(${var.PATH_TO_PRIVATE_KEY})}"
     }
+  }
+
+  // This command will be executed locally: (linux/mac)
+  provisioner "local-exec" {
+    command = "echo ${aws_instance.box001.private_ip} >> privateIPlist.txt"
   }
 
   //
@@ -30,5 +35,15 @@ resource "aws_instance" "box001" {
     ]
   }
 }
+
+
+output "ip" {
+  value = "${aws_instance.box001.public_ip}"
+}
+
+
+
+
+
 
 

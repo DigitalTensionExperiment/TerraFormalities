@@ -61,14 +61,24 @@ Use private key to login: connection{}
 After uploading a script: execute 
 - remote-exec 
 
+After provisioner script is run via terraform apply, visit host IP in browser; 
+
 
 #### AWS Security Group (firewall)
 Allow access from local IP to instance 
 - inbound rule: ALLOW all TCP traffic type from [source.ip]/32 ; 
 
 
+#### Output 
+Use output{} to display public IP of an AWS resource; 
 
-
+provisioner "local-exec" {}: 
+- can be used to collect and store private IPs of all instances 
+launched, and use that to start automation following provisioning; 
+- can populate an Ansible host file with these IP addresses and then use playbook to provision 
+software on those hosts; 
+- can execute a script with attributes as arguments, which will take care of a mapping of resource 
+names and IP addresses;  
 
 
 
