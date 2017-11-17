@@ -30,9 +30,12 @@ $ terraform apply output.file
 
 $ terraform plan -out output.file ; terraform apply output.file ; rm output.file 
 
+Launch instance: 
 $ terraform apply 
 
 $ terraform destroy 
+
+
 
 #### File upload: 
  
@@ -44,16 +47,42 @@ $ terraform destroy
       private_key = ""
     }
   }
-  
-  
-
-#### Provisioning software  
-- file upload: provisioner "file"{...} added to instance;   
+    
 
 
-Upload public key to AWS: resource "aws_key_pair" ""{...} 
+#### Provisioning software 
+ 
+File upload: provisioner "file"{...} added to instance;   
+
+- Upload public key to AWS: resource "aws_key_pair" ""{...} 
 
 Use private key to login: connection{} 
 
 After uploading a script: execute 
 - remote-exec 
+
+
+#### AWS Security Group (firewall)
+Allow access from local IP to instance 
+- inbound rule: ALLOW all TCP traffic type from [source.ip]/32 ; 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
