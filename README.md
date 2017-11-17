@@ -81,6 +81,48 @@ software on those hosts;
 names and IP addresses;  
 
 
+#### State 
+
+Terraform keeps remote state of infrastructure 
+- terraform.tfstate (JSON)
+- terraform.tfstate.backup (backup of the provision state) 
+
+New state file and backup are created by running terraform apply; 
+Ok to keep them in version control (git);
+
+The larger the project, store state remotely (rather than locally) using the 
+ backend functionality: 
+ - local backup 
+
+Other backends: (not all remote stores have locking)
+- s3 (w/ a locking mechanism using dynamoDB) 
+- consul (w/ locking) 
+- terraform enterprise (commercial solution) 
+
+Locking prevents conflicts by allowing only 1 party 
+to update the state at the same time; 
+
+For [enabling] remote operations: enhanced backends 
+(see: https://www.terraform.io/docs/backends/types/index.html) 
+
+Configuring a remote state: 
+1. add backend code to a *.tf file 
+2. run initialization 
+
+When using s3, best to configure AWS creds using AWS commandline utility 
+- $ aws configure  
+(backend code needs access to AWS s3 before it does any other initialization) 
+- $ terraform init 
+(this will then initialize the backend) 
+
+Remote store of terraform state helps avoid having to commit and push 
+terraform.tfstate to git; 
+
+read-only remote stores can be specified directly in *.tf file; 
+
+
+
+
 
 
 
