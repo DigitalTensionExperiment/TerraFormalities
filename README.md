@@ -64,7 +64,7 @@ After uploading a script: execute
 After provisioner script is run via terraform apply, visit host IP in browser; 
 
 
-#### AWS Security Group (firewall)
+#### AWS Security Group (firewall/iptables in linux)
 Allow access from local IP to instance 
 - inbound rule: ALLOW all TCP traffic type from [source.ip]/32 ; 
 
@@ -119,6 +119,80 @@ Remote store of terraform state helps avoid having to commit and push
 terraform.tfstate to git; 
 
 read-only remote stores can be specified directly in *.tf file; 
+
+
+#### Data sources 
+
+dynamic information 
+- accessible via their API 
+- exposed in structured format via data sources 
+
+AMIs list 
+
+Availability zones list 
+
+Filter on incoming/outgoing traffic using security groups on: 
+- IP range 
+- port 
+- protocol (TCP, UDP, ICMP, etc)
+
+
+
+Note: store .aws/credentials file locally; 
+
+securitygroup.tf 
+
+
+#### Template providers 
+Helps create customized config files 
+
+resource attributes (ie: public IP) 
+create variable based on terraform resource attributes 
+build templates based on these variables 
+
+result = string (can be used in other variables) 
+[This] string contains a template (ie: config file) 
+Can be used to create 
+* generic templates 
+* cloud init configs 
+
+Create a template file
+
+Create a script that uses that template file 
+
+
+#### Reminders 
+
+10.0.x.x  <>  10.0.0.0/16 
+
+10.x.x.x  <>  10.0.0.0/8 
+
+172.16.0.0/12 = range(172.16.0.0, 172.31.255.255)
+
+###### Subnets 
+
+###### Subnet masks 
+
+
+Note: every availability zone has it's own private and public subnets; 
+
+All public subnets are connected to an internet Gateway; 
+
+NAT Gateways allow private instances to communicate with the outside 
+but not from outside to inside; 
+
+vpc.td 
+
+nat.tf 
+
+
+
+
+
+
+
+
+
 
 
 
