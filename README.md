@@ -187,6 +187,14 @@ nat.tf
 
 
 
+#### Docker 
+
+$ docker build -t myapp-repository-url/myapp . 
+
+$ `aws ecr get-login` 
+
+$ docker push myapp-repository-url/myapp 
+
 
 
 

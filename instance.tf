@@ -5,6 +5,10 @@ resource "aws_key_pair" "terrakey" {
   public_key = "${file(${var.PATH_TO_PUBLIC_KEY})}"
 }
 
+resource "aws_ecr_repository" "" {
+  name = ""
+}
+
 resource "aws_instance" "box001" {
 
   # security group not being specified (for now)
@@ -38,6 +42,11 @@ resource "aws_instance" "box001" {
 
 output "ip" {
   value = "${aws_instance.box001.public_ip}"
+}
+
+# This is the URL we're going to use to push the Docker image:
+output "myapp-repository-URL" {
+  value = ""
 }
 
 
