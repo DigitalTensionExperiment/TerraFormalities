@@ -1,4 +1,30 @@
-# TerraFormalities
+# TerraFormalities 
+
+
+
+## Req: 
+
+celery worker 
+
+redis 
+- 8 core 
+
+mongoDB 
+
+SQL 
+
+jenkins 
+
+VPN 
+
+VPC 
+
+web server 1
+
+web server 2
+
+
+
 
 Find AMI ID's here:
 https://cloud-images.ubuntu.com/locator/ec2/
